@@ -13,8 +13,6 @@
 @property (nonatomic , strong)UIButton *switchButton;
 @property (nonatomic , strong)UILabel *switchTitleLabel;
 
-@property (nonatomic , assign , readwrite)BOOL isOpen;
-
 @end
 
 @implementation OMSwitch{
@@ -62,7 +60,12 @@
     [super layoutSubviews];
     
     _switchButton.frame = self.bounds;
-    _switchTitleLabel.frame = CGRectMake(2, 2, self.frame.size.width * 0.7, self.frame.size.height - 4);
+    if (!_switchButton.selected) {
+        _switchTitleLabel.frame = CGRectMake(2, 2, self.frame.size.width * 0.7, self.frame.size.height - 4);
+    }else{
+        _switchTitleLabel.frame = CGRectMake(self.frame.size.width - 2 - self.frame.size.width * 0.7, 2, self.frame.size.width * 0.7, self.frame.size.height - 4);
+    }
+ 
     
 }
 
@@ -85,10 +88,10 @@
     
     CGFloat x = (self.frame.size.width * 0.3 - 4);
     [UIView animateWithDuration:0.3 animations:^{
-        if (!isOpen) {
-            _switchTitleLabel.center = CGPointMake(_switchTitleLabel.center.x + x, _switchTitleLabel.center.y);
-        }else{
+        if (!isOpen) { //yes -> no
             _switchTitleLabel.center = CGPointMake(_switchTitleLabel.center.x - x, _switchTitleLabel.center.y);
+        }else{  //no -> yes
+            _switchTitleLabel.center = CGPointMake(_switchTitleLabel.center.x + x, _switchTitleLabel.center.y);
         }
     }];
 
@@ -251,6 +254,10 @@
 
 - (BOOL)isOpen{
     return _switchButton.selected;
+}
+
+- (void)setIsOpen:(BOOL)isOpen{
+    [self switchButtonAction:_switchButton];
 }
 
 @end

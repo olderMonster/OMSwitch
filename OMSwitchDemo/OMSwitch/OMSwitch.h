@@ -34,7 +34,7 @@
 @property (nonatomic , strong)UIColor *unselectedBgColor;
 
 //当前Switch的状态
-@property (nonatomic , assign , readonly)BOOL isOpen;
+@property (nonatomic , assign)BOOL isOpen;
 
 
 @property (nonatomic , weak)id<OMSwitchDelegate>delegate;

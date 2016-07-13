@@ -32,6 +32,7 @@
         _userSwitch = [[OMSwitch alloc]init];
         _userSwitch.selectedText = @"弹幕";
         _userSwitch.unselectedText = @"弹幕";
+        _userSwitch.isOpen = NO;
     }
     return _userSwitch;
 }
